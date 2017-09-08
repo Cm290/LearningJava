@@ -1,0 +1,63 @@
+sourceSets {
+    integration {
+        if(project.plugins.hasPlugin(JavaPlugin)) {
+            java {
+                srcDir file('src/integration/java')
+            }
+        }
+        if(project.plugins.hasPlugin(ScalaPlugin)) {
+            scala {
+                srcDir file('src/integration/scala')
+            }
+        }
+        resources {
+            srcDir file('src/integration/resources')
+        }
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+
+configurations {
+    integrationCompile.extendsFrom testCompile
+    integrationRunTime.extendsFrom testRuntime
+}
+
+//task integration(type: Test) {
+//    systemProperty "spring.profiles.active", "local"
+////    setTestClassesDirs(sourceSets.integration.output.classesDirs)
+//    classpath = sourceSets.integration.runtimeClasspath
+//    outputs.upToDateWhen { false }
+//}
+//
+//task integrationRemote(type: Test) {
+//    systemProperties=System.properties
+//    systemProperty "spring.profiles.active", "remote"
+//    setTestClassesDirs(sourceSets.integration.output.classesDirs)
+//    classpath = sourceSets.integration.runtimeClasspath
+//    outputs.upToDateWhen { false }
+//}
+//
+//check.dependsOn integration
+//integration.mustRunAfter test
+//
+//tasks.withType(Test) {
+//    reports.html.destination = file("${reporting.baseDir}/${name}")
+//
+//    testLogging {
+//        showExceptions true
+//        showCauses true
+//        showStackTraces true
+//        exceptionFormat = 'full'
+//        events "standardOut", "passed", "skipped", "failed"
+//        afterSuite { desc, result ->
+//            // Match the outermost suite
+//            if (!desc.parent) {
+//                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+//                def startItem = '|  ', endItem = '  |'
+//                def repeatLength = startItem.length() + output.length() + endItem.length()
+//                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+//            }
+//        }
+//    }
+//}

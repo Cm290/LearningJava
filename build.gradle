@@ -1,0 +1,21 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0'
+}
+
+allprojects {
+    project.group 'dog.broker'
+}
+
+subprojects {
+    apply plugin: "java"
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        maven {
+            name "bbc-releases"
+            url "https://artifactory.dev.bbc.co.uk/artifactory/libs-releases-local"
+        }
+    }
+}

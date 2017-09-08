@@ -1,0 +1,44 @@
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+findbugs {
+    ignoreFailures = true
+}
+
+tasks.withType(FindBugs) {
+    task -> enabled = gradle.startParameter.taskNames.contains("check")
+        reports {
+            xml.enabled = true
+            xml.destination file("$project.buildDir/reports/findbugs/findbugsXml.xml")
+        }
+}
+
+tasks.withType(Pmd){
+    task -> enabled = gradle.startParameter.taskNames.contains("check")
+        reports{
+            xml.enabled = true
+            xml.destination file("$project.buildDir/reports/pmd/pmd.xml")
+        }
+}
+
+pmd {
+    ignoreFailures = true
+}
+
+checkstyle {
+    ignoreFailures = true
+    configFile = rootProject.file('gradle/config/checkstyle.xml')
+}
+
+checkstyleTest {
+    enabled = false
+}
+
+tasks.withType(Checkstyle) {
+    task -> enabled = gradle.startParameter.taskNames.contains("check")
+        reports {
+            xml.enabled = true
+            xml.destination file("$project.buildDir/reports/checkstyle/checkstyle-result.xml")
+        }
+}

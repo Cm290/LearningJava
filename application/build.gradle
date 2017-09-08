@@ -1,0 +1,47 @@
+plugins {
+    id "org.springframework.boot" version "1.5.4.RELEASE"
+    id 'de.fuerstenau.buildconfig' version '1.1.8'
+}
+
+apply plugin: "org.springframework.boot"
+apply plugin: 'de.fuerstenau.buildconfig' // Usage: https://github.com/mfuerstenau/gradle-buildconfig-plugin
+apply plugin: 'idea'
+apply from: "$rootDir/gradle/scripts/integration.gradle"
+apply from: "$rootDir/gradle/scripts/sa.gradle"
+
+bootRepackage {
+    mainClass = 'dog.broker.Application'
+    executable = true
+    classifier= 'app'
+}
+
+bootRun {
+    jvmArgs = ["-Dspring.output.ansi.enabled=ALWAYS"]   // Makes Spring Boot colourful for Gradle!
+}
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+buildConfig {
+    appName = parent.name
+}
+
+dependencies {
+    compile             group: 'org.springframework.boot',  name: 'spring-boot-starter-jersey', version: "${springBootVersion}"
+    compile             group: 'org.springframework.boot',  name: 'spring-boot-starter-jetty',  version: "${springBootVersion}"
+    compile             group: 'bbc.datasys.commons',       name: 'common-aws',                 version: "${datasysCommonsVersion}"
+    compile             group: 'bbc.datasys.commons',       name: 'common-status-check',        version: "${datasysCommonsVersion}"
+    compile             group: 'bbc.datasys.commons',       name: 'common-object',              version: "${datasysCommonsVersion}"
+    compile             group: 'org.projectlombok',         name: 'lombok',                     version: "${lombokVersion}"
+
+    testCompile         group: 'junit',                     name: 'junit',                      version: "${junitVersion}"
+    testCompile         group: 'org.mockito',               name: 'mockito-core',               version: "${mockitoVersion}"
+    testCompile         group: 'org.hamcrest',              name: 'hamcrest-all',               version: "${hamcrestVersion}"
+
+    integrationCompile  group: 'org.springframework.boot',  name: 'spring-boot-starter-test',   version: "${springBootVersion}"
+    integrationCompile  group: 'info.cukes',                name: 'cucumber-java',              version: "${cucumberVersion}"
+    integrationCompile  group: 'info.cukes',                name: 'cucumber-junit',             version: "${cucumberVersion}"
+    integrationCompile  group: 'info.cukes',                name: 'cucumber-spring',            version: "${cucumberVersion}"
+    integrationCompile  group: 'com.jayway.jsonpath',       name: 'json-path-assert',           version: "${jsonPathVersion}"
+}

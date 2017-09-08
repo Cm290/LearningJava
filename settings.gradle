@@ -1,0 +1,3 @@
+rootProject.name = 'dog-broker'
+include 'application'
+
