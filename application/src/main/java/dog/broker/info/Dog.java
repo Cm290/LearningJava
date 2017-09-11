@@ -16,4 +16,9 @@ public class Dog {
     public void hadBirthday() {
        age ++;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

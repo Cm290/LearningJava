@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JerseyConfiguration extends ResourceConfig{
-    public JerseyConfiguration() {
-        register(DogEndpoint.class);
+    public JerseyConfiguration(DogEndpoint dogEndpoint) {
+        register(dogEndpoint);
     }
 }
