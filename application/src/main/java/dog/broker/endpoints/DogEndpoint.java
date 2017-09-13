@@ -10,8 +10,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static org.springframework.util.StringUtils.isEmpty;
-
 @Component
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/dogEndpoint")
@@ -21,8 +19,6 @@ public class DogEndpoint {
     public DogEndpoint(DogKennelMemory dogKennelMemory) {
         this.dogKennelMemory = dogKennelMemory;
     }
-
-//    Dog trevor = Dog.builder().name("Trevor").age(2).measurements(Measurements.builder().height(24).build()).build();
 
     @GET
     public Response getDogs() {
