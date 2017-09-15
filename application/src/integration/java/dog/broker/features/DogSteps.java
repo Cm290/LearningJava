@@ -1,32 +1,22 @@
 package dog.broker.features;
 
-import com.google.common.base.Strings;
 import com.jayway.jsonpath.JsonPath;
-import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import dog.broker.info.Dog;
 import dog.broker.ioc.CucumberStepsDefinition;
-import org.apache.commons.lang3.StringUtils;
-import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.fail;
 
 /**
  * Created by morric67 on 14/09/2017.

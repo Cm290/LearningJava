@@ -1,8 +1,6 @@
 package dog.broker.endpoints;
 
-import com.amazonaws.services.elasticache.model.SourceType;
 import dog.broker.info.Dog;
-import dog.broker.info.Measurements;
 import dog.broker.info.Message;
 import dog.broker.service.DogKennelMemory;
 import org.springframework.stereotype.Component;
