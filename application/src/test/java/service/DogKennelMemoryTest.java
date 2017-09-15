@@ -10,15 +10,16 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 public class DogKennelMemoryTest {
-    private Dog trevor = Dog.builder().name("Trevor").build();
-    private Dog trevorUpdate = Dog.builder().name("Trevor").age(2).build();
-    private Dog julia = Dog.builder().name("Juila").age(1).build();
-    private Dog fred =  Dog.builder().name("Fred").build();
+    private static final Dog trevor = Dog.builder().name("Trevor").build();
+    private static final Dog trevorUpdate = Dog.builder().name("Trevor").age(2).build();
+    private static final Dog julia = Dog.builder().name("Juila").age(1).build();
+    private static final Dog fred =  Dog.builder().name("Fred").build();
 
     @Mock
     private DogKennelMemory undertest;
@@ -32,11 +33,18 @@ public class DogKennelMemoryTest {
 
 
     @Test
-    public void  getDogKennelMemory() throws Exception {
+    public void getDogKennelMemory() throws Exception {
 
         final Dog dog = undertest.get(0);
 
         assertThat(dog, is(equalTo(trevor)));
+    }
+
+    @Test
+    public void getIsPassedNullShouldReturnNull() throws Exception {
+        final Dog dog = undertest.get(null);
+
+        assertThat(dog, is(equalTo(null)));
     }
 
     @Test
