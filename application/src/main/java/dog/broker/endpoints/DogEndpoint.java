@@ -1,7 +1,6 @@
 package dog.broker.endpoints;
 
 import dog.broker.info.Dog;
-import dog.broker.info.Measurements;
 import dog.broker.info.Message;
 import dog.broker.service.DogKennelMemory;
 import org.springframework.stereotype.Component;
@@ -30,6 +29,7 @@ public class DogEndpoint {
     @GET
     @Path("/{id}")
     public Response getDog(@PathParam("id") Integer id) {
+
         Dog dog = dogKennelMemory.get(id);
         if(dog == null){
             return dogNotFound();
@@ -65,6 +65,7 @@ public class DogEndpoint {
         if(dogKennelMemory.get(id) == null){
             return dogNotFound();
         }
+
         return Response
                 .ok(dogKennelMemory.update(id, dog))
                 .build();

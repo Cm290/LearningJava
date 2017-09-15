@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class EndpointConfig {
     @Bean
-    public DogEndpoint dogEndpoint(DogKennelMemory dogKennelMemory){
-        return new DogEndpoint(dogKennelMemory);
+    public DogKennelMemory dogKennelMemory() {
+        return new DogKennelMemory();
     }
 
     @Bean
-    public DogKennelMemory dogKennelMemory() {
-        return new DogKennelMemory();
+    public DogEndpoint dogEndpoint(DogKennelMemory dogKennelMemory){
+        return new DogEndpoint(dogKennelMemory);
     }
 }
